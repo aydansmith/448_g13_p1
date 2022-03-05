@@ -1,17 +1,14 @@
 /**
- * @file  game.js
- * @date  2022.02.12
+ * @file  easy_ai_game.js
+ * @date  2022.02.22
  * 
- * @brief Defines the Battleship game
+ * @brief Defines the Medium AI Battleship game
  * 
- * @author Andrew MacGillivray
- * @author Luke McCumber
- * @author Brian Bosse
- * @author Jarrod Grothusen
+ * @author Aydan Smith
  */
-
  "use strict";
 
+ // Audio effects for each possibility
  const hit = new Audio("assets/hit_effect.wav");
  const miss = new Audio("assets/miss_effect.wav");
  const sunk = new Audio("assets/sunk_ship_effect.wav");
@@ -1086,7 +1083,7 @@
         this._queue = [];
 
     }
-
+    //determines if coordinates have already been trageted by AI
     inTargets(x, y){
         for(let i = 0; i < this._targets.length; i++){
             let coords = this._targets[i];
@@ -1149,6 +1146,8 @@
      */
     _targetingHandler() {
         // random numbers based off of https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+        // if the queue is empty, generate a random number and check if it has already been targeted
+        // if the queue is not empty, target the top of the queue if it is a legal manuever
         let finished = false;
         let x;
         let y;
@@ -1218,7 +1217,7 @@
         if (ref.classList.contains("s")) {
             
             if (debug) console.log(this._opponent);
-
+            // add the touching points to the queue
             // Update the health of the opposing player's ship
             console.log("player 2 hit a ship");
             this._queue.push([x-1,y]);
@@ -1306,7 +1305,7 @@
      * @returns {void}
      */
     _placementTurnHandler() {
-        
+        //generate random number of movements to place each ship
         let ship = this._ships[this._shipsPlaced];
         let A = Math.floor(Math.random() * 9);
         let D = Math.floor(Math.random() * 9);

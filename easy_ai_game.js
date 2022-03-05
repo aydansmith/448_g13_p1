@@ -1,13 +1,10 @@
 /**
- * @file  game.js
- * @date  2022.02.12
+ * @file  easy_ai_game.js
+ * @date  2022.02.22
  * 
- * @brief Defines the Battleship game
+ * @brief Defines the Easy AI Battleship game
  * 
- * @author Andrew MacGillivray
- * @author Luke McCumber
- * @author Brian Bosse
- * @author Jarrod Grothusen
+ * @author Aydan Smith
  */
 
  "use strict";
@@ -27,7 +24,7 @@
      'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
      'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
  ];
-
+//definition of sound elements
  const hit = new Audio("assets/hit_effect.wav");
  const miss = new Audio("assets/miss_effect.wav");
  const sunk = new Audio("assets/sunk_ship_effect.wav");
@@ -1086,7 +1083,7 @@
         this._queue = [];
 
     }
-
+    //determines if coordinates have already been trageted by AI
     inTargets(x, y){
         for(let i = 0; i < this._targets.length; i++){
             let coords = this._targets[i];
@@ -1151,7 +1148,7 @@
         // random numbers based off of https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
         let finished = false;
         let x;
-        let y;
+        let y; // we generate a random number for x and y until we have a valid guess that hasn't been placed before
         while(!finished){
             x = Math.floor(Math.random() * 10);
             y = Math.floor(Math.random() * 10);

@@ -1,17 +1,14 @@
 /**
- * @file  game.js
- * @date  2022.02.12
+ * @file  hard_ai_game.js
+ * @date  2022.02.22
  * 
- * @brief Defines the Battleship game
+ * @brief Defines the Hard AI Battleship game
  * 
- * @author Andrew MacGillivray
- * @author Luke McCumber
- * @author Brian Bosse
- * @author Jarrod Grothusen
+ * @author Aydan Smith
  */
 
  "use strict";
-
+// definition of sounds for various possibilities
  const hit = new Audio("assets/hit_effect.wav");
  const miss = new Audio("assets/miss_effect.wav");
  const sunk = new Audio("assets/sunk_ship_effect.wav");
@@ -1081,13 +1078,13 @@
          * @todo 
          */
         this._oppShipsDestroyed = 0;
-
+        // stores the targets
         this._targets = []; 
 
         this._count = 0;
 
     }
-
+    // determines if the coordinates have already been targeted
     inTargets(x, y){
         for(let i = 0; i < this._targets.length; i++){
             let coords = this._targets[i];
@@ -1150,7 +1147,7 @@
      */
     _targetingHandler() {
         // random numbers based off of https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-        let id = this._oppenent_ships[this._count];
+        let id = this._oppenent_ships[this._count]; //gets id from list of opponents ship placements
         this._count++;
         
 
@@ -1257,7 +1254,7 @@
      * @returns {void}
      */
     _placementTurnHandler() {
-        
+        //generates random number of ship movements to place each ship
         let ship = this._ships[this._shipsPlaced];
         let A = Math.floor(Math.random() * 9);
         let D = Math.floor(Math.random() * 9);
