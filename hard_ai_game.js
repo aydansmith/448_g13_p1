@@ -12,6 +12,11 @@
 
  "use strict";
 
+ const hit = new Audio("hit_effect.wav");
+ const miss = new Audio("miss_effect.wav");
+ const sunk = new Audio("sunk_ship_effect.wav");
+ const over = new Audio("ended.wav");
+
  /**
   * @brief Set to false to disable extraneous "console.log()" operations.
   */
@@ -718,6 +723,7 @@
             this._b_target.obj = this;
         }
         else{
+            over.play();
             openModal("The AI won the game! Please exit the page");
             Promise(resolve => setTimeout(resolve, 3000));
             this._turnEndButton.addEventListener("click", function(e){
@@ -769,13 +775,14 @@
          let msg = "Hit!";
  
          if (ref.classList.contains("s")) {
-             
+             hit.play();
              if (debug) console.log(opponent);
  
              // Update the health of the opposing player's ship
              let shipHit = ref.getAttribute(shipAttribute);
                  shipHit = fleet.indexOf(shipHit);
              if ( opponent._ships[shipHit].decrementHealth() ) {
+                 sunk.play();
                  //e.currentTarget.obj._oppShipsDestroyed++
                  this._opponent._oppShipsDestroyed++;
                  msg = msg + " You sank their " + ref.getAttribute(shipAttribute);
@@ -785,6 +792,7 @@
              document.getElementById(id).classList.add("h");
              ref.classList.add("h");
          } else {
+             miss.play();
              msg = "Miss!";
              document.getElementById(id).classList.add("m");
              ref.classList.add("m");
@@ -1436,7 +1444,7 @@
       */
      triggerWin( forPlayer )
      {
-         
+         over.play();
          openModal("A grueling battle... But Player " + forPlayer + " has come out on top!");
          // location.reload();
          // document.getElementById("modalContainer").addEventListener("")
